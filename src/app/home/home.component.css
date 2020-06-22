@@ -1,0 +1,48 @@
+.header{
+    height: 60px;
+    background: #000;
+    color:  white;
+}
+.form-control{
+    color: white;
+    width: 115px;
+    background-color: black;
+}
+.names{
+    display: inline !important;
+    color: green;
+}
+.mainClass{
+    background-color: black;
+}
+
+.card{
+    height: 250px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+.m-lr-15{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.mainClass p {
+    color: #fff;
+}
+
+.header .float-right {
+    margin-top: 10px;
+    float: right !important;
+    margin-right: 30px;
+}
+.header h1 {
+    padding-left: 22px;
+    /* padding-top: 10px; */
+    /* margin-top: 10px; */
+}
+p {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+.noMatches{
+    background-color: lightskyblue;
+}
