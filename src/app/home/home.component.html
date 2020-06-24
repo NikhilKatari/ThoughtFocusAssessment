@@ -1,31 +1,29 @@
 <div>
-    <div class="header">
+    <div class="header fixed-top">
         <div class="float-left">
             <h1> Movie Trailers</h1>
         </div>
         <div class="float-right">
-            <select type="select" class="form-control names"
-                (change)="onChange($event.target.value)">
+            <select type="select" class="form-control names" (change)="onChange($event.target.value)">
                 <option [value]="language" *ngFor="let language of fileData[0]; let i = index;">{{language}}</option>
             </select>
             <span class="pl-3">
-                <select type="select" class="form-control names ">
-                    <option *ngFor='let genere of genereList'>{{genere}}</option>
+                <select type="select" class="form-control names" (change)="onChangeGenere($event.target.value)">
+                    <option *ngFor='let genere of genereList;  let i = index;'>{{genere}}</option>
                 </select>
             </span>
         </div>
     </div>
     <div class="mainClass">
         <div class="row m-lr-15">
-            <div class="col-2" *ngFor="let item of movieData | keyvalue">
+            <div class="col-2" *ngFor="let item of movieData | keyvalue; ">
                 <div class="card">
-                <iframe width="210" height="250" [src]="get_url_parameter(item.value.TrailerURL)"></iframe>
+                    <iframe width="210" height="250" [src]="get_url_parameter(item.value.TrailerURL)"></iframe>
+                </div>
+                <p>{{item.value.EventTitle}}</p>
             </div>
-            <p>{{item.value.EventTitle}}</p>
         </div>
     </div>
-    
-</div>
-<div class="row m-lr-15 noMatches" *ngIf="movieData.length == 0">        
-    <p> No Movies Found</p>
-</div>
+    <div class="row m-lr-15 noMatches" *ngIf="movieData.length == 0">
+        <p> No Movies Found</p>
+    </div>
