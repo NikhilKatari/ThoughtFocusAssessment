@@ -14,7 +14,10 @@ export class HomeComponent implements OnInit {
   fileData: any;
 
   genereList: any = [];
-  constructor(private sanitizer: DomSanitizer, private http: HttpClient) { }
+  constructor(private sanitizer: DomSanitizer, private http: HttpClient) {
+    this.sanitizer = sanitizer;
+
+   }
 
   ngOnInit(): void {
 
@@ -78,9 +81,21 @@ export class HomeComponent implements OnInit {
     this.movieData = Object.keys(getDataList).map(j => getDataList[j]).filter(x => x.EventGenre.toLowerCase().includes(selectedValue.toLowerCase()));
     console.log(this.filterList);
   }
-  // for youtube url
-  get_url_parameter(url) {
-      var c = url.match('v=([^&]*)')[1];
-      return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + c);
-  }
+  //for youtube url
+  // get_url_parameter(url) {
+    
+  //     var c = url.match('v=([^&]*)')[1];
+  //     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + c);
+  // }
+  get_url_parameter = (url: string) => {
+    const [a, , b] = url
+      .replace(/(>|<)/gi, '')
+      .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    if (b !== undefined) {
+      // return b.split(/[^0-9a-z_-]/i)[0];
+      return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" +b);
+    } else {
+      return a;
+    }
+  };
 }
