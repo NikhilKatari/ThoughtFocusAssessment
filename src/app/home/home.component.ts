@@ -87,15 +87,24 @@ export class HomeComponent implements OnInit {
   //     var c = url.match('v=([^&]*)')[1];
   //     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + c);
   // }
+  // get_url_parameter = (url: string) => {
+  //   const [a, , b] = url
+  //     .replace(/(>|<)/gi, '')
+  //     .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+  //   if (b !== undefined) {
+  //     // return b.split(/[^0-9a-z_-]/i)[0];
+  //     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" +b);
+  //   } else {
+  //     return a;
+  //   }  
+  // };
+
+  // Youtube regex added
   get_url_parameter = (url: string) => {
-    const [a, , b] = url
-      .replace(/(>|<)/gi, '')
-      .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-    if (b !== undefined) {
-      // return b.split(/[^0-9a-z_-]/i)[0];
-      return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" +b);
-    } else {
-      return a;
-    }
-  };
+  var regex = new RegExp(/^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/);
+  var url = url;
+  var matches = regex.exec(url);
+  var videoId = matches[2];
+  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" +  videoId);
+  }
 }
