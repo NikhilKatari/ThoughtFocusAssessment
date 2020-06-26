@@ -62,23 +62,22 @@ export class HomeComponent implements OnInit {
     console.log(this.genereList);
   }
   // drodown selected value
-  onChange(selectedValue) {
-    console.log(selectedValue);
+  onChange(selectedLanguage) {
+    console.log(selectedLanguage);
     console.log(this.movieData);
 
     let getDataList = this.filterList;
-    this.movieData = Object.keys(getDataList).map(k => getDataList[k]).filter(x => x.EventLanguage.toLowerCase() == selectedValue.toLowerCase());
-
+    this.movieData = Object.keys(getDataList).map(k => getDataList[k]).filter(x => x.EventLanguage.toLowerCase() == selectedLanguage.toLowerCase());
     console.log(this.movieData, 'filtered');
 
   }
   // drodown selected value
-  onChangeGenere(selectedValue) {
-    console.log(selectedValue);
+  onChangeGenere(selectedGenere) {
+    console.log(selectedGenere);
     console.log(this.movieData);
 
     let getDataList = this.filterList;
-    this.movieData = Object.keys(getDataList).map(j => getDataList[j]).filter(x => x.EventGenre.toLowerCase().includes(selectedValue.toLowerCase()));
+    this.movieData = Object.keys(getDataList).map(j => getDataList[j]).filter(x => x.EventGenre.toLowerCase().includes(selectedGenere.toLowerCase()));
     console.log(this.filterList);
   }
   //for youtube url
@@ -105,6 +104,7 @@ export class HomeComponent implements OnInit {
   var url = url;
   var matches = regex.exec(url);
   var videoId = matches[2];
+  console.log(videoId);
   return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" +  videoId);
   }
 }
